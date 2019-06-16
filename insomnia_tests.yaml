@@ -1,0 +1,227 @@
+_type: export
+__export_format: 4
+__export_date: 2019-06-16T17:09:19.808Z
+__export_source: insomnia.desktop.app:v6.5.4
+resources:
+  - _id: req_c44f921dacfd4c5598a6685535173125
+    authentication: {}
+    body: {}
+    created: 1560607582800
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1559484004582
+    method: GET
+    modified: 1560704281803
+    name: /contacts
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts"
+    _type: request
+  - _id: fld_b21dd585780a456b9e5bcfd18f656c2a
+    created: 1560606172349
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1560606172349
+    modified: 1560704751162
+    name: phonebook
+    parentId: wrk_ea92a7ba62014815848d128b07622f90
+    _type: request_group
+  - _id: wrk_ea92a7ba62014815848d128b07622f90
+    created: 1539175574134
+    description: ""
+    modified: 1539175574134
+    name: Insomnia
+    parentId: null
+    _type: workspace
+  - _id: req_d92b44acad724e6382aa994ace1ac94f
+    authentication: {}
+    body: {}
+    created: 1560613746927
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1558922914777
+    method: GET
+    modified: 1560704533995
+    name: /contacts/:id
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts/5d0675a1338b85c43b30a2ae"
+    _type: request
+  - _id: req_11eb8d68b4804cf8b568de3b06e99707
+    authentication: {}
+    body: {}
+    created: 1560695508853
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1558817710438.5625
+    method: GET
+    modified: 1560704252394
+    name: /contacts/count
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts/count"
+    _type: request
+  - _id: req_fdcb6b86d44648e0b3160b183c975bdc
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Karthik Chejerla",
+        	"entries": [
+        		{
+        			"kind": "Mobile",
+        			"value": "+61-470306510",
+        			"label": "Sydney"
+        		},
+        		{
+        			"kind": "Mobile",
+        			"value": "+91-8688829689",
+        			"label": "Sydney"
+        		},
+        		{
+        			"kind": "Email",
+        			"value": "chejerlakarthik@gmail.com",
+        			"label": "Personal"
+        		}
+        	]
+        }
+    created: 1560606184192
+    description: ""
+    headers:
+      - id: pair_51d0e06a39004ae590df046ee49558ff
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1558782642325.75
+    method: POST
+    modified: 1560704415702
+    name: /contacts
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts"
+    _type: request
+  - _id: req_30ff7a8c4faa47e4a9a664cd5537d4d6
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "name": "Karthik Chejerla"
+        }
+    created: 1560686333006
+    description: ""
+    headers:
+      - id: pair_51d0e06a39004ae590df046ee49558ff
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1558712506100.125
+    method: PUT
+    modified: 1560704586622
+    name: /contacts
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts/5d0675a1338b85c43b30a2ae"
+    _type: request
+  - _id: req_5fb9f2bf623b4c2db249089e98c3de8b
+    authentication: {}
+    body: {}
+    created: 1560614011668
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1558642369874.5
+    method: DELETE
+    modified: 1560704375412
+    name: /contacts/:id
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts/5d06710c7eed14c290b82816"
+    _type: request
+  - _id: req_2d36d0d877fa49afac94f552a015dceb
+    authentication: {}
+    body: {}
+    created: 1560676040624
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1558502097423.25
+    method: DELETE
+    modified: 1560704226969
+    name: /contacts
+    parameters: []
+    parentId: fld_b21dd585780a456b9e5bcfd18f656c2a
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{ local  }}/contacts"
+    _type: request
+  - _id: env_7b85eeef479749df8539a3bc63e7dbc1
+    color: null
+    created: 1539175574171
+    data: {}
+    dataPropertyOrder: null
+    isPrivate: false
+    metaSortKey: 1539175574171
+    modified: 1539175574171
+    name: New Environment
+    parentId: wrk_ea92a7ba62014815848d128b07622f90
+    _type: environment
+  - _id: jar_88b9620d84844643893c2f2a3a7532c6
+    cookies: []
+    created: 1539175574174
+    modified: 1539175574174
+    name: Default Jar
+    parentId: wrk_ea92a7ba62014815848d128b07622f90
+    _type: cookie_jar
+  - _id: env_fa8d2ebcf16e47b5b7c254f536b19acd
+    color: null
+    created: 1560614812952
+    data:
+      local: http://localhost:4000
+    dataPropertyOrder:
+      "&":
+        - local
+    isPrivate: false
+    metaSortKey: 1560614812952
+    modified: 1560614963628
+    name: Localhost
+    parentId: env_7b85eeef479749df8539a3bc63e7dbc1
+    _type: environment

@@ -3,9 +3,8 @@ const morgan = require("morgan");
 const requestId = require('express-request-id');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const uuid = require('uuid');
 
-const phoneRoutes = require('./api/routes/phone')
+const contactRoutes = require('./api/routes/contact')
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -28,7 +27,7 @@ app.use(morgan("combined"));
 app.use(bodyParser.json());
 
 // routes
-app.use('/phones', phoneRoutes)
+app.use("/contacts", contactRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
