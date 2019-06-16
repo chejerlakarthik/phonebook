@@ -1,20 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const Phone = require("../model/phone.model");
+const Contact = require("../model/contact.model");
 
 router.post("/", (req, res, next) => {
   const now = new Date()
-  const phoneEntry = new Phone({
+  const newContact = new Contact({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
-    phone: req.body.phone,
-    countryCode: req.body.countryCode,
+    entries: req.body.entries,
     created: now,
     lastUpdated: now
   });
 
-  Phone.findOne({ name: req.body.name }, (err, entry) => {
+  Contact.findOne({ name: req.body.name }, (err, entry) => {
     if (err) {
       res.status(500).json({
         error: err
@@ -24,19 +23,17 @@ router.post("/", (req, res, next) => {
         res.status(400).json({
           error: `Entry with name ${req.body.name} already exists`
         });
-      } 
-      else {
-        phoneEntry
+      } else {
+        newContact
           .save()
           .then(doc => {
             console.log(`Entry saved: ${doc}`);
             res.status(201).json({
-              message: "New entry added",
-              phoneEntry: {
+              message: "Added new contact",
+              contact_details: {
                 id: doc._id,
                 name: doc.name,
-                phone: doc.phone,
-                countryCode: doc.countryCode,
+                entries: doc.entries,
                 created: doc.created,
                 lastUpdated: doc.lastUpdated,
                 links: {
@@ -57,22 +54,21 @@ router.post("/", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  Phone.find()
+  Contact.find()
     .select("-__v")
     .then(docs => {
-      console.log(`Found ${docs.length} phone numbers`);
+      console.log(`Found ${docs.length} contacts`);
       res.status(200).json({
         count: docs.length,
-        phoneEntries: docs.map(entry => {
+        contacts: docs.map(contact => {
           return {
-            id: entry._id,
-            name: entry.name,
-            phone: entry.phone,
-            countryCode: entry.countryCode,
-            created: entry.created,
-            lastUpdated: entry.lastUpdated,
+            id: contact._id,
+            name: contact.name,
+            entries: contact.entries,
+            created: contact.created,
+            lastUpdated: contact.lastUpdated,
             links: {
-              self: `http://localhost:4000/phones/${entry.id}`
+              self: `http://localhost:4000/phones/${contact.id}`
             }
           };
         })
@@ -87,7 +83,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/count", (req, res, next) => {
-  Phone.find()
+  Contact.find()
     .then(docs => {
       res.status(200).json({
         count: docs.length
@@ -101,20 +97,23 @@ router.get("/count", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-  Phone.findById(req.params.id)
+  Contact.findById(req.params.id)
     .select("-__v")
-    .then(entry => {
-      if (entry) {
+    .then(contact => {
+      if (contact) {
         res.status(200).json({
-          id: entry._id,
-          name: entry.name,
-          phone: entry.phone,
-          countryCode: entry.countryCode,
-          created: entry.created
+          id: contact._id,
+          name: contact.name,
+          entries: contact.entries,
+          created: contact.created,
+          lastUpdated: contact.lastUpdated,
+          links: {
+            self: `http://localhost:${process.env.PORT}/contacts/${contact._id}`
+          }
         });
       } else {
         res.status(404).json({
-          message: "Entry not found"
+          message: "Contact not found"
         });
       }
     })
@@ -126,37 +125,36 @@ router.get("/:id", (req, res, next) => {
     });
 });
 
-router.get("/by-number/:number", (req, res, next) => {
-  Phone.findOne({phone: req.params.number})
-       .select('-__v')
-       .then(contact => {
-         if (contact) {
-           res.status(200).json({
-             id: contact._id,
-             name: contact.name,
-             phone: contact.phone,
-             countryCode: contact.countryCode,
-             created: contact.created,
-             lastUpdated: contact.lastUpdated,
-             links: {
-               self: `http://localhost:${process.env.PORT}/phones/${contact._id}`
-             }
-           });
-         } else {
-           res.status(404).json({
-             message: 'Not found'
-           });
-         }
-       })
-       .catch(err => {
-         res.status(500).json({
-           error: err
-         })
-       });
-});
+// router.get("/by-number/:number", (req, res, next) => {
+//   Contact.findOne({phone: req.params.number})
+//        .select('-__v')
+//        .then(contact => {
+//          if (contact) {
+//            res.status(200).json({
+//              id: contact._id,
+//              name: contact.name,
+//              entries: contact.entries,
+//              created: contact.created,
+//              lastUpdated: contact.lastUpdated,
+//              links: {
+//                self: `http://localhost:${process.env.PORT}/contacts/${contact._id}`
+//              }
+//            });
+//          } else {
+//            res.status(404).json({
+//              message: 'Not found'
+//            });
+//          }
+//        })
+//        .catch(err => {
+//          res.status(500).json({
+//            error: err
+//          })
+//        });
+// });
 
 router.put("/:id", (req, res, next) => {
-  Phone.findByIdAndUpdate(
+  Contact.findByIdAndUpdate(
     // the id of the document that needs to be updated
     req.params.id,
     // the request body - Mongoose should intelligently merge the update with existing model
@@ -164,16 +162,15 @@ router.put("/:id", (req, res, next) => {
     // Tell mongoose to return the updated model instead of the pre-updated one
     { new: true }
   )
-    .then(entry => {
+    .then(contact => {
       res.status(200).json({
-        id: entry._id,
-        name: entry.name,
-        phone: entry.phone,
-        countryCode: entry.countryCode,
-        created: entry.created,
-        lastUpdated: entry.lastUpdated,
+        id: contact._id,
+        name: contact.name,
+        entries: contact.entries,
+        created: contact.created,
+        lastUpdated: contact.lastUpdated,
         links: {
-          self: `http://localhost:4000/phones/${entry._id}`
+          self: `http://localhost:4000/phones/${contact._id}`
         }
       });
     })
@@ -186,7 +183,7 @@ router.put("/:id", (req, res, next) => {
 });
 
 router.delete("/:id", (req, res, next) => {
-  Phone.deleteOne({
+  Contact.deleteOne({
     _id: req.params.id
   })
     .then(doc => {
@@ -208,7 +205,7 @@ router.delete("/:id", (req, res, next) => {
 });
 
 router.delete("/", (req, res, next) => {
-  Phone.deleteMany({})
+  Contact.deleteMany({})
        .then(response => {
          res.status(200).json({
            count: response.deletedCount
