@@ -2,7 +2,7 @@
 A simple phonebook app to manage contacts.
 
 To dockerize the app,
-``` docker build -t <tag-name> . ```
+``` docker build -t <tag-name> . ```  
 e.g. ``` docker build -t chejerlakarthik/phonebook . ```
 
 To run the docker container,
