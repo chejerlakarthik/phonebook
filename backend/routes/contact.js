@@ -13,6 +13,7 @@ router.post("/", (req, res, next) => {
     lastUpdated: now
   });
 
+  debugger
   Contact.findOne({ name: req.body.name }, (err, entry) => {
     if (err) {
       res.status(500).json({

@@ -3,8 +3,9 @@ const morgan = require("morgan");
 const requestId = require('express-request-id');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const chalk = require('chalk');
 
-const contactRoutes = require('./api/routes/contact')
+const contactRoutes = require('./backend/routes/contact')
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -45,5 +46,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+    console.log(chalk.white.inverse.bold(`Listening on port ${PORT}`));
 });

@@ -1,2 +1,2 @@
-# phonebook
-A simple phonebook app using NodeJS
+# Phonebook
+A simple phonebook app to manage contacts.
