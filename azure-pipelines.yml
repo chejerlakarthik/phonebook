@@ -10,12 +10,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
+- task: Docker@2
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    docker build -t chejerlakarthik/phonebook .
+  displayName: 'docker build'
